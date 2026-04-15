@@ -1,3 +1,12 @@
-const supabaseUrl = "https://rexkylqupopiusorgdni.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJleGt5bHF1cG9waXVzb3JnZG5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4NDAyNTAsImV4cCI6MjA2MzQxNjI1MH0.A0ha39mt_dkSSkBAQHehVXQwpzhb6JoxhymF2mxtczA";
-export const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// Client-side Supabase config must only use publishable values.
+// Inject these at build/runtime (for example on window.__APP_CONFIG__).
+// Never place SUPABASE_SECRET_KEY or service-role keys in static JS.
+const runtimeConfig = window.__APP_CONFIG__ || {};
+const supabaseUrl = runtimeConfig.SUPABASE_URL || "";
+const supabasePublishableKey = runtimeConfig.SUPABASE_PUBLISHABLE_KEY || "";
+
+if (!supabaseUrl || !supabasePublishableKey) {
+  throw new Error("Missing client Supabase runtime config: SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY are required.");
+}
+
+export const supabase = window.supabase.createClient(supabaseUrl, supabasePublishableKey);

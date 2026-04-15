@@ -3,6 +3,7 @@ from docx import Document
 import os
 import re
 import numpy as np
+from typing import Any, cast
 from collections import Counter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFactory
@@ -12,7 +13,8 @@ from Sastrawi.StopWordRemover.StopWordRemoverFactory import StopWordRemoverFacto
 def extract_text_from_pdf(path):
     try:
         doc = fitz.open(path)
-        return " ".join(page.get_text() for page in doc)
+        pages = [cast(Any, doc.load_page(i)).get_text() for i in range(doc.page_count)]
+        return " ".join(pages)
     except Exception as e:
         print(f"Error membaca PDF {path}: {e}")
         return ""
