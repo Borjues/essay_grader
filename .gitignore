@@ -1,0 +1,15 @@
+# Repository-level ignores
+# Python cache and bytecode
+__pycache__/
+*.pyc
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Node / Next
+/node_modules/
+/.next/
+
+# misc
+.DS_Store

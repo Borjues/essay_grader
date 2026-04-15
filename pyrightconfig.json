@@ -1,0 +1,8 @@
+{
+  "typeCheckingMode": "basic",
+  "exclude": [
+    "**/venv/**",
+    "**/.venv/**",
+    "uploaditin_backend/venv/**"
+  ]
+}
